@@ -1,8 +1,44 @@
-node_modules
-.env.local
+# Dependencies
+node_modules/
+.npm
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment files — never commit secrets
 .env
-dist
-build
-.next
-coverage
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+
+# TypeScript
+*.tsbuildinfo
+
+# Supabase local dev
+.supabase/
+
+# Playwright
+playwright-report/
+test-results/

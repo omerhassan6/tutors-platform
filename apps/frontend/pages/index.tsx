@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { supabase } from '../lib/supabaseClient'
 
-export default function Home() {
-  const [users, setUsers] = useState<any[]>([])
+/**
+ * Root page — immediately redirects to /dashboard if authenticated,
+ * otherwise redirects to /login.
+ */
+export default function RootPage() {
+  const router = useRouter()
+
   useEffect(() => {
-    fetch('http://localhost:3001/users')
-      .then(r => r.json())
-      .then(setUsers)
-      .catch(() => setUsers([]))
-  }, [])
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      router.replace(session ? '/dashboard' : '/login')
+    })
+  }, [router])
 
-  return (
-    <main style={{padding: 24}}>
-      <h1>Tutors Platform — Next.js frontend</h1>
-      <p>Backend: <a href="http://localhost:3001">NestJS on port 3001</a></p>
-      <h2>Users</h2>
-      {users.length === 0 ? (
-        <p>No users or failed to fetch.</p>
-      ) : (
-        <ul>
-          {users.map(u => (
-            <li key={u.id}>{u.email || u.id}</li>
-          ))}
-        </ul>
-      )}
-    </main>
-  )
+  return null
 }

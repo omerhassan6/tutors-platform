@@ -7,6 +7,13 @@
   "scripts": {
     "start:frontend": "npm --workspace=apps/frontend run dev",
     "start:backend": "npm --workspace=apps/backend run start:dev",
-    "dev": "echo Run frontend and backend in separate terminals: npm run start:frontend && npm run start:backend"
+    "build": "npm --workspace=apps/backend run build && npm --workspace=apps/frontend run build",
+    "test": "npm --workspace=apps/backend run test",
+    "dev": "echo 'Run in separate terminals: npm run start:frontend  |  npm run start:backend'",
+    "install:all": "npm install"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
   }
 }
